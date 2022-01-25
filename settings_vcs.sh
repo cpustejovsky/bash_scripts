@@ -1,4 +1,4 @@
-cd $HOME/development/personal/bashprofile
+cd $HOME/development/bashprofile
 git fetch
 git checkout main
 cp bashrc.txt bashrc_old.txt
