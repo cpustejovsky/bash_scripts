@@ -1,14 +1,12 @@
 #!/usr/bin/env sh
 
-ZK_PATH=”$HOME/development/second_brain
-
-cd “$ZK_PATH”
+cd $HOME/development/second_brain
 
 git pull
 
-CHANGES_EXIST=”$(git status --porcelain | wc -l)”
+CHANGES_EXIST=$(git status --porcelain | wc -l)
 
-if [ $CHANGES_EXIST != "0" ]; then
+if [ $CHANGES_EXIST -eq 0 ]; then
 
 exit 0
 
