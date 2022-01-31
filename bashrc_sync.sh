@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 cd $HOME/development/bashprofile
-git fetch
+git pull
 git checkout main
 cp bashrc.txt bashrc_old.txt
 cp ~/.bashrc bashrc.txt
