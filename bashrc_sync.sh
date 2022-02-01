@@ -15,5 +15,5 @@ fi
 
 rm bashrc_old.txt
 git add .
-git commit -q -m “$(date +”%Y-%m-%d”)”
-git push -q
+git commit -m “$(date +”%Y-%m-%d”)”
+git push

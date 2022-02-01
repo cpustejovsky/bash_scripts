@@ -12,4 +12,4 @@ exit 0
 
 fi
 
-git add .; git commit -q -m “$(date +”%Y-%m-%d %H:%M:%S”)”; git push -q
+git add .; git commit -m “$(date +”%Y-%m-%d %H:%M:%S”)”; git push
