@@ -1,26 +1,26 @@
 #!/bin/bash
 
-while getopts ":i" opt; do
+while getopts ":icm" opt; do
   case $opt in
     i)
-      INTERACTIVE=true
+      git rebase -i HEAD~$2
+      ;;
+    c)
+      git rebase --continue
+      ;;
+    m)
+      git checkout main
+      git pull
+      git checkout -
+      git rebase main
       ;;
     \?)
-      INTERACTIVE=false
+      exit 1
       ;;
   esac
 done
 
-if [ "$INTERACTIVE" == true ] ; then
-  git rebase -i HEAD~$2
-else
-  git checkout main
-  git pull
-  git checkout -
-  git rebase main
-fi
-
-echo "Do you want  to force push now? (type y to continue, CTRL-C to cancel)"
+echo "Do you want  to force push now? (type y and press enter to continue, CTRL-C to cancel)"
 read response
 if [ "$response" == "y" ] ; then
   git push --force-with-lease
