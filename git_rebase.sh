@@ -22,6 +22,7 @@ done
 
 echo "Do you want  to force push now? (type y and press enter to continue, CTRL-C to cancel)"
 read response
-if [ "$response" == "y" ] ; then
+
+if [ "$response" = y ]; then
   git push --force-with-lease
 fi
