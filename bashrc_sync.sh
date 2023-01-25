@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-cd $HOME/development/bashprofile
+cd "$HOME"/development/configs || exit
 git fetch
 git checkout main
 cp bashrc.txt bashrc_old.txt
@@ -15,5 +15,5 @@ fi
 
 rm bashrc_old.txt
 git add .
-git commit -S -m “$(date +”%Y-%m-%d”)”
+git commit -S -m "$(date +%Y-%m-%d)"
 git push
