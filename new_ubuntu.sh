@@ -32,6 +32,8 @@ cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-key
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
   sudo tee /etc/apt/sources.list.d/signal-xenial.list
 
+# Update and Upgrade APT
+
 sudo apt update
 sudo apt upgrade
 
@@ -53,13 +55,15 @@ sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin dock
 sudo apt install spotify-client -y
 sudo apt  install tree -y
 sudo apt install signal-desktop -y
+sudo apt install libpam-u2f -y
+
 #Clean Up APT
 sudo apt autoclean
 sudo apt autoremove
 sudo apt clean
 
 #Add Flathub
-flatpak remote-add --if-not-exists flathub https://flathub-org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 #Install Rust
 curl https://sh.rustup.rs -sSf | sh 
