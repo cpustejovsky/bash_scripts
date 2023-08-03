@@ -32,6 +32,13 @@ cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-key
 echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
   sudo tee /etc/apt/sources.list.d/signal-xenial.list
 
+# Install Postgres
+# Create the file repository configuration:
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+
+# Import the repository signing key:
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
 # Update and Upgrade APT
 
 sudo apt update
@@ -56,7 +63,10 @@ sudo apt install spotify-client -y
 sudo apt  install tree -y
 sudo apt install signal-desktop -y
 sudo apt install libpam-u2f -y
-
+sudo apt install xbanish -y
+# Install the latest version of PostgreSQL.
+# If you want a specific version, use 'postgresql-12' or similar instead of 'postgresql':
+sudo apt-get -y install postgresql
 #Clean Up APT
 sudo apt autoclean
 sudo apt autoremove
@@ -73,6 +83,13 @@ curl https://sh.rustup.rs -sSf | sh
 
 #Install Calibre
 sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin
+
+#Install nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+#Install QMK
+python3 -m pip install --user qmk
+qmk setup
 
 #Install Slack
 wget -q https://slack.com/downloads/instructions/ubuntu -O - \
@@ -149,10 +166,16 @@ gh repo clone cpustejovsky/configs
 gh repo clone cpustejovsky/bash_scripts
 gh repo clone cpustejovsky/vim
 
+# Add global gitignore and git user name and emailk
+touch "$HOME"/.gitignore
+echo ".idea/*" >> "$HOME"/.gitignore
+git config --global core.excludesfile ~/.gitignore
+
+
 #Set up bashrc configuration
 cp "$HOME"/development/configs/bashrc.txt "$HOME"/.bashrc
 source "$HOME"/.bashrc
 
 echo "Install Todoist and Obsidian appimages manually after setting up appimagelauncher"
-echo "Install "
+
 #TODO determine a better way to remove snapd
