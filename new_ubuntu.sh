@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+read -r -e -p "testing that this works (it won't work if you ran the script with sh new_ubuntu.sh); just press enter" 
 #Add APT sources
 sudo apt install curl -y
 sudo apt install software-properties-common -y
