@@ -1,19 +1,15 @@
-#!/usr/bin/bash
+#!/usr/bin/env sh
 
-mkdir -p "$HOME"/.fonts
-mkdir -p "$HOME"/Pictures/Personal
-mkdir -p "$HOME"/Pictures/Screenshots
-mkdir -p "$HOME"/Pictures/Slack
-mkdir -p "$HOME"/Pictures/Wallpapers
-mkdir -p "$HOME"/development/keyboard
-mkdir -p "$HOME"/Documents/calibre
-mkdir -p "$HOME"/Documents/taxes
+cd $1 || exit
 
-cp -a Pictures/. "$HOME"/Pictures/
-cp -a fonts/. "$HOME"/.fonts
-cp -a development/. "$HOME"/development
-cp -a keyboard/. "$HOME"/development/keyboard
-cp -a Music/. "$HOME"/Music/
-cp -a Videos/. "$HOME"/Videos/
-cp -a Documents/. "$HOME"/Documents/
+git pull
 
+CHANGES_EXIST=$(git status --porcelain | wc -l)
+if [ "$CHANGES_EXIST" -eq 0 ]; then
+
+exit 0
+
+fi
+NOW=$( date '+%F_%H:%M:%S' )
+echo $NOW
+git add .; git commit -S -m “$NOW”; git push
