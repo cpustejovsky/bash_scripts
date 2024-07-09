@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-cd $HOME/development/second_brain
+cd $1 || exit
 
 git pull
 
