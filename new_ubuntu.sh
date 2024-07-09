@@ -5,8 +5,6 @@ read -r -e -p "testing that this works (it won't work if you ran the script with
 sudo apt install curl -y
 sudo apt install software-properties-common -y
 sudo add-apt-repository universe
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo add-apt-repository ppa:appimagelauncher-team/stable
 curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
@@ -52,7 +50,6 @@ sudo apt install libfuse2 -y
 sudo apt install vlc -y
 sudo apt  install direnv -y
 sudo apt install neovim -y
-sudo apt install brave-browser -y
 sudo apt install appimagelauncher -y
 sudo apt install gnome-sushi -y
 sudo apt install gnome-shell-extensions -y
@@ -101,11 +98,6 @@ wget -q https://slack.com/downloads/instructions/ubuntu -O - \
 | xargs wget -q -O slack-desktop-latest.deb
 sudo dpkg -i slack-desktop-latest.deb
 rm slack-desktop*
-
-#Install Go
-echo; read -n 1 -r -s -p $"Install Go in your Downloads folder and press enter to continue"; echo
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "$HOME"/Downloads/go1.*.tar.gz
-echo "Go is installed"
 
 #Set Up Docker
 sudo groupadd docker
@@ -172,6 +164,20 @@ touch "$HOME"/.gitignore
 echo ".idea/*" >> "$HOME"/.gitignore
 git config --global core.excludesfile ~/.gitignore
 
+timedatectl set-local-rtc 1
+
+apt install zsh
+
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+cp /home/cpustejovsky/development/configs/zshrc.txt /home/cpustejovsky/.zshrc
+cp /home/cpustejovsky/development/configs/"Menlo for Powerline.ttf" ~/.fonts
+fc-cache -vf ~/.fonts
+
+#Install Go
+echo; read -n 1 -r -s -p $"Install Go in your Downloads folder and press enter to continue"; echo
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "$HOME"/Downloads/go1.*.tar.gz
+echo "Go is installed"
 
 #Set up bashrc configuration
 cp "$HOME"/development/configs/bashrc.txt "$HOME"/.bashrc
@@ -179,4 +185,4 @@ source "$HOME"/.bashrc
 
 echo "Install Todoist and Obsidian appimages manually after setting up appimagelauncher"
 
-#TODO determine a better way to remove snapd
+#TODO determine a better wa:y to remove snapd
