@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd $HOME/go/src/personal-site/
+cd $HOME/development/go/personal-site/
 status=$(git status)
 
 if [[ $status == *"main"* ]] && [[ $status == *"nothing to commit"* ]]; then
