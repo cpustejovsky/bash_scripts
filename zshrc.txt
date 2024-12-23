@@ -1,12 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 export DEFAULT_USER=$USER
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:/home/linuxbrew/.linuxbrew/opt/ccache/libexec
 export PATH=$PATH:$HOME/.cargo/env
-export GO111MODULE="auto" 
-export GOEXERCISM="$GOPATH/src/exercism/go/"
-#export VIM="$HOME/vim"
+# *** You need to add /home/cpustejovsky/development/go/goroot/bin to your PATH.
+export PATH=$PATH:/home/cpustejovsky/development/go/goroot/bin
+# export PATH=$PATH:/usr/local/go/bin
 #export VIMRUNTIME="/usr/share/nvim/runtine"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -23,17 +21,15 @@ PATH="$HOME/.local/bin:$PATH"
 . "$HOME/.cargo/env"
 PATH="$HOME/.luarocks/bin:$PATH"
 PATH="$PATH:/opt/nvim-linux64/bin"
-PATH="$PATH:/home/cpustejovsky/Applications/GoLand-2023.3.4/bin"
+export SECOND_BRAIN="$HOME/development/second_brain"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="agnoster"
-#ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -52,7 +48,7 @@ ZSH_THEME="agnoster"
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
+zstyle ':omz:plugins:git' aliases no
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
 
@@ -115,11 +111,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; 
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -136,33 +132,52 @@ alias ohmyzsh="mate ~/.oh-my-zsh"
 #custom aliases
 #alias docker-compose="docker compose"
 alias k=kubectl
-alias updatekb="qmk flash $HOME/development/keyboard/current.hex"
+alias zim='nvim $HOME/.zshrc && source $HOME/.zshrc'
+alias editalcritty='nvim $HOME/.config/alacritty/alacritty.toml'
+alias updatekb="sh $HOME/development/bash_scripts/updatekb.sh"
 alias update="sh $HOME/development/bash_scripts/update.sh"
-alias btreconnect="bluetoothctl connect F0:A6:54:81:77:AA"
+alias youtube="sh $HOME/development/bash_scripts/youtube.sh"
+HEADPHONE="AC:BF:71:82:7E:F3"
+alias disconnectheadphone="bluetoothctl disconnect $HEADPHONE"
+alias connectheaphone="bluetoothctl connect $HEADPHONE"
+alias removeheadphone="bluetoothctl remove $HEADPHONE"
+alias btreconnect="disconnectheadphone && connectheaphone"
 alias restartbt="sudo systemctl restart bluetooth"
 alias bashprofile="vim ~/.bashrc"
 alias dev='cd $HOME/development/ && ls -l'
-alias godev='cd $HOME/go/src && ls -l'
-
-alias cdb='godev && cd cockroach && ls -l'
-alias versla='godev && cd availability && ls -l'
-alias clrs='godev && cd ready-steady-go/clrs && ls -l'
-alias versla='godev && cd availability && ls -l'
-alias schemetest='guile --no-auto-compile -s $HOME/development/schemer/test.scm'
+alias godev='cd $HOME/development/go/ && ls -l'
 alias vim='nvim'
+alias vi='nvim'
+alias playground='nvim $HOME/development/go/ready-steady-go/playground/main.go'
+alias runplayground='go run ~/development/go/ready-steady-go/playground/main.go'
+alias tmuxhelp='go run ~/development/go/ready-steady-go/tmux/main.go'
+alias versla='godev && cd availability && vim .'
+alias goroot='vim $HOME/development/go/goroot'
+alias expressiveWriting='sh $HOME/development/bash_scripts/expressiveWriting.sh'
 
 # git aliases
 alias gbranch="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads | head"
 alias gbranchall="git for-each-ref --sort='-authordate:iso8601' --format=' %(authordate:relative)%09%(refname:short)' refs/heads"
 alias bashrcSync="sh $HOME/development/bash_scripts/bashrc_sync.sh"
-alias gitRebase="/$HOME/development/bash_scripts/git_rebase.sh"
+alias gitRebase="sh $HOME/development/bash_scripts/git_rebase.sh"
 alias stash='git stash --include-untracked'
 alias gs='git status'
-
+alias goodmorning='redshift -P -O 6000'
+alias nightnight='redshift -P -O 1500'
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 
-function checkGitDirs() {
-	find . -name .git -execdir bash -c 'echo -en "\033[1;31m"repo: "\033[1;34m"; basename "`git rev-parse --show-toplevel`"; git status -s' \;
+alias feelsbad='glow $SECOND_BRAIN/Personal/Wellbeing/Priority_Mental_Health.md'
+alias whatdo='glow $SECOND_BRAIN/Personal/Wellbeing/Map.md'
+
+function FindAndReplace(){
+    sh $HOME/development/bash_scripts/find_and_replace.sh $@
+}
+
+function updateOpenAPISpec(){
+  mv $HOME/Downloads/openapi3_0.json $HOME/development/go/availability/docs
+}
+
+function goplayground() {
 }
 
 function gco() {
@@ -182,32 +197,35 @@ function gri() {
 }
 
 function gtd() {
-	tod t q
+	tod t q --content $@
 }
 
 killport() {
   sudo kill $(sudo lsof -t -i:$1)
 }
 
-tdt(){
-	go run "$HOME"/go/src/ready-steady-go/todotime/main.go $@
+timeLeft(){
+      go run /home/cpustejovsky/development/go/ready-steady-go/timeLeft/main.go
 }
-onepiece(){
-	go run "$HOME"/go/src/ready-steady-go/manga/main.go onePiece $@
+
+
+toggl(){
+  /home/cpustejovsky/development/go/toggltrack/track -compareMonth=11 -compareYear=2024 -compareMonth_hour=83 -compareMonth_minute=20 -weekendWork=90.0 -showIdeal=false $@
 }
-berserk(){
-	go run "$HOME"/go/src/ready-steady-go/manga/main.go berserk $@
-}
+
+# ideal(){
+#   toggl -showCompareMonth=false -showIdeal=true $@
+# }
 quotes_copy(){
 	xclip -sel c < /home/cpustejovsky/development/quotes/news-feed-eradicator.md
-}
-debdownload(){
-	/home/cpustejovsky/development/bash_scripts/download_deb.sh $@
 }
 appimage_startup(){
 	/home/cpustejovsky/development/bash_scripts/appimage_startup.sh $@
 }
 
 
-source /home/cpustejovsky/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/cpustejovsky/development/google-cloud-sdk/path.zsh.inc' ]; then . '/home/cpustejovsky/development/google-cloud-sdk/path.zsh.inc'; fi
 
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/cpustejovsky/development/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/cpustejovsky/development/google-cloud-sdk/completion.zsh.inc'; fi
