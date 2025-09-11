@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Find name based on appimage name inside directory
 FILE=$(find "$HOME"/.local/share/applications -name "*$1.desktop")

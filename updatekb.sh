@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 read -p "Enter the name of the file you want updated [current]: " name
 name=${name:-current}

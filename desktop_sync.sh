@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 mkdir -p "$HOME"/.fonts
 mkdir -p "$HOME"/Pictures/Personal
