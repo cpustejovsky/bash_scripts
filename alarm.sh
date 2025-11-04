@@ -13,8 +13,13 @@ else
     TIME="$(($1*60+$2))"
 fi
 
+MAX=$((60*12))
+if [ $TIME -gt $MAX ]; then
+    echo "$TIME is greater than maximum time; try again"
+    exit
+fi
 echo "$TIME minutes until alarm goes off"
-# export XDG_RUNTIME_DIR="/run/user/1000"
-# mplayer -ss 30 -endpos 0:$TIME:00 "$HOME"/Music/brown_noise.mp3
-# mplayer -endpos 0:5:00 "$HOME"/Music/TES_ambience_soft.mp3
-# mplayer "$HOME"/Music/chop_suey.mp3
+export XDG_RUNTIME_DIR="/run/user/1000"
+mplayer -ss 30 -endpos 0:$TIME:00 "$HOME"/Music/brown_noise.mp3
+mplayer -endpos 0:5:00 "$HOME"/Music/TES_ambience_soft.mp3
+mplayer "$HOME"/Music/chop_suey.mp3
