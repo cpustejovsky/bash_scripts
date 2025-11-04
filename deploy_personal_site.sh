@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
 
-cd $HOME/development/go/personal-site/
+cd "$HOME"/development/go/personal-site/ || exit
 status=$(git status)
 
 if [[ $status == *"main"* ]] && [[ $status == *"nothing to commit"* ]]; then
