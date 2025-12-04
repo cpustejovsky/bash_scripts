@@ -11,7 +11,6 @@ mkdir Heroes
 cd Heroes
 touch archive.txt
 yt-dlp --download-archive archive.txt https://www.youtube.com/playlist?list=PL9d3JV6oTebxJq0SBKkr5GIbqfFFv5SPq
-
 cd $HOME/Videos
 mkdir -p Gophercon/Top
 cd Gophercon/Top
