@@ -3,13 +3,13 @@
 HR=$(date '+%H')
 MIN=$(date '+%M')
 if [ "${3^^}" == "AM" ]; then
-    echo "Alarm will go off at "$1":"$(printf '%02d' $2)" AM"
-    TIME="$(($1*60+24*60+$2-(10#$HR*60+$MIN)))"
+    echo "Alarm will go off at $1:$(printf '%02d' "$2") AM"
+    TIME="$(($1*60+24*60+$2-(10#$HR*60+10#MIN)))"
 elif [ "${3^^}" == "PM" ]; then
-    echo "Alarm will go off at "$1":"$(printf '%02d' $2)" PM"
-    TIME="$(($1*60+24*60+$2-((10#$HR+12)*60+$MIN)))"
+    echo "Alarm will go off at $1:$(printf '%02d' "$2") PM"
+    TIME="$(($1*60+24*60+$2-((10#$HR+12)*60+MIN)))"
 else
-    echo "Alarm will run for "$1"hr "$2"min"
+    echo "Alarm will run for ""$1""hr ""$2""min"
     TIME="$(($1*60+$2))"
 fi
 
