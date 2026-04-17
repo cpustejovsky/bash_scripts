@@ -5,8 +5,8 @@ rest_args=("${all_args[@]:1}")
 
 text="${rest_args[@]}"
 
-if [[ $type != "prayers" && $type != "quotes" ]]; then
-   echo "first argument must be 'prayers' or 'quotes'" 
+if [[ $type != "prayers" && $type != "quotes" && $type != "affirmations" ]]; then
+   echo "first argument must be 'prayers' or 'quotes' or 'affirmations'" 
    exit
 fi
 
