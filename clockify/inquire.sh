@@ -1,6 +1,5 @@
 #!/bin/env bash
 
+now=$(bc -l <<<"scale=0;$(clockify-cli report -p tech today -F)*60/1")
+echo $now
 
-now=$(bc -l <<<"$(clockify-cli report -p tech today -F)")
-total=$(bc -l <<<"$(clockify-cli report -p tech this-month -F)"-"${now}")
-echo $total 0 $now 0

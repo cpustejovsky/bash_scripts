@@ -19,8 +19,10 @@ fi
 cd "$HOME"/Music/ || exit
 
 read -p "What $PROJECT project do you want to make progress on? " task
-dunstify "Pray the Jesus Prayer until you hear the horn" ""
-clockify-cli in -p rest -d "REST" > /dev/null
+read -p "How will you rest before $task? " rest
+dunstify "$rest until you hear the horn" ""
+/home/cpustejovsky/development/go/quotes/popup -f /home/cpustejovsky/.local/share/chezmoi/dot_config/quotes/prayers.txt
+clockify-cli in -p rest -d "${rest}" > /dev/null
 wait 5
 clockify-cli out > /dev/null
 mplayer reveille.opus -endpos 0:0:6 &> /dev/null
@@ -28,6 +30,5 @@ start="$(date '+%H:%M:%S')"
 echo "starting $task at $start for 25 minutes"
 clockify-cli in -p "$PROJECT" -d "${task}" > /dev/null
 wait 25
-dunstify "You did it! Give yourself a pat on the back, some time to stretch your legs and do it again! You got this!" ""
 dunstify "You are one step closer to being the human being you wish to be. This is a win. やった" ""
 mplayer loz-chest-opening.opus &> /dev/null
