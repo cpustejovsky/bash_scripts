@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+for file in *; do
+	if [[ -f "$file" && "$file" == *.sh ]]
+	then
+		new=${file::-3}
+		mv "$file" "$new"
+	fi
+done
