@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+NAME=$1
+PRONOUN=$2
+POSSESSIVE=$2
+if [[ -z $NAME ]]; then
+	echo "Need a name as first argument"
+	exit
+fi
+if [[ -z $PRONOUN ]]; then
+	echo "Need a possessive pronoun as second argument"
+	exit
+fi
+if [[ $PRONOUN == "him" ]]; then
+	POSSESSIVE="his"
+fi
+if [[ $PRONOUN == "them" ]]; then
+	POSSESSIVE="their"
+fi
+
+prayer="O God, our help in time of need, Who are just and merciful, and Who inclines to the supplications of His people. Look down upon $NAME and have mercy on $PRONOUN and deliver $PRONOUN from the trouble that now besets $PRONOUN. Deal with $NAME not according to $POSSESSIVE iniquities, but according to Your manifold mercies, for we are the works of Your hands, and You know our weaknesses. I pray to you to grant $NAME Your divine helping grace, and endow $PRONOUN with patience and strength to endure $POSSESSIVE hardships with complete submission to Your Will.
+
+Only You know our misery and sufferings, and to You, our only hope and refuge, we flee for relief and comfort, trusting in Your infinite love and compassion, that in due time, when You know best, You will deliver $NAME from this trouble, and turn $POSSESSIVE distress into comfort. We then shall rejoice in Your mercy, and exalt and praise Your Holy Name, O Father, Son and Holy Spirit, both now and forever and to the ages of ages. Amen."
+echo "$prayer" > tempprayer.md
+glow tempprayer.md
+rm tempprayer.md
+
+

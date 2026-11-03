@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 echo "Commands go here"
+if ! output=$(cat "$HOME" > /dev/null); then
+	echo "$output"
+	echo "failed"
+fi
 
 
 

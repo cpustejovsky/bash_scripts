@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+curl https://infinitejest.wallacewiki.com/david-foster-wallace/index.php?title=Pages_321-342 | cat
+
+
+

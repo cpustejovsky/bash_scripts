@@ -15,16 +15,17 @@ PROJECT=$1
 cd "$HOME"/Music/ || exit
 
 read -p "What $PROJECT project do you want to make progress on? " -r task
+read -p "How long will you work on $task? " -r worktime
 read -p "How will you rest before $task? " -r rest
 read -p "How long will you rest for? " -r time
 dunstify "$rest for $time minutes" ""
 /home/cpustejovsky/development/go/quotes/popup -f /home/cpustejovsky/.local/share/chezmoi/dot_config/quotes/prayers.txt
 clockify-cli in -p rest -d "${rest}" > /dev/null
-sleepForMinutes $time
+sleepForMinutes "$time"
 clockify-cli out > /dev/null
 mplayer gong.opus -endpos 0:0:6 &> /dev/null
 dunstify "Start work on $task"
 clockify-cli in -p "$PROJECT" -d "${task}" > /dev/null
-sleepForMinutes 25
+sleepForMinutes "$worktime"
 dunstify "You are one step closer to being the human being you wish to be. This is a win. やった" ""
 mplayer loz-chest-opening.opus &> /dev/null
